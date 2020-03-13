@@ -117,13 +117,13 @@ class AudioRecorderController: UIViewController {
             
             self.updateViews()
             
-//            if let audioRecorder = self.audioRecorder,
-//                self.isRecording == true {
-//
-//                audioRecorder.updateMeters()
-//                self.audioVisualizer.addValue(decibelValue: audioRecorder.averagePower(forChannel: 0))
-//
-//            }
+            if let audioRecorder = self.audioRecorder,
+                self.isRecording == true {
+
+                audioRecorder.updateMeters()
+                self.audioVisualizer.addValue(decibelValue: audioRecorder.averagePower(forChannel: 0))
+
+            }
             
             if let audioPlayer = self.audioPlayer,
                 self.isPlaying == true {
@@ -253,6 +253,7 @@ class AudioRecorderController: UIViewController {
             audioRecorder = try AVAudioRecorder(url: recordingURL!, format: format)
             audioRecorder?.record()
             audioRecorder?.delegate = self
+            audioRecorder?.isMeteringEnabled = true
             updateViews()
             startTimer()
         } catch {
