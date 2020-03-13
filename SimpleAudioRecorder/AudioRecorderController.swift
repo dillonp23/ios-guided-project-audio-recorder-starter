@@ -85,6 +85,10 @@ class AudioRecorderController: UIViewController {
     
     // MARK: - Playback
     
+    var isPlaying: Bool {
+        audioPlayer?.isPlaying ?? false
+    }
+    
     func loadAudio() {
         let songURL = Bundle.main.url(forResource: "piano", withExtension: "mp3")!
         
@@ -107,11 +111,11 @@ class AudioRecorderController: UIViewController {
     */
     
     func play() {
-        
+        audioPlayer?.play()
     }
     
     func pause() {
-        
+        audioPlayer?.pause()
     }
     
     
@@ -172,7 +176,11 @@ class AudioRecorderController: UIViewController {
     // MARK: - Actions
     
     @IBAction func togglePlayback(_ sender: Any) {
-        audioPlayer?.play()
+        if isPlaying {
+            audioPlayer?.pause()
+        } else {
+            audioPlayer?.play()
+        }
     }
     
     @IBAction func updateCurrentTime(_ sender: UISlider) {
